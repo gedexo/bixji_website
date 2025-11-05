@@ -1,0 +1,31 @@
+.form-control{
+    border: 1px solid #d9e1e1 !important;
+    border-radius: 8px;
+    width: 100%;
+    height: 50px !important;
+    background: var(--td-common-white);
+    font-family: var(--td-ff-poppins);
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: var(--td-grey-1);
+}
+div:where(.swal2-container) div:where(.swal2-html-container) {
+    font-size: 15px !important;
+}
+div:where(.swal2-container) h2:where(.swal2-title){
+    font-size: 25px !important;
+}
+
+.td-hero-3-title {
+    font-weight: 700;
+    font-size: 60px !important;
+    line-height: 123%;
+    color: var(--td-common-white);
+}
+
+.td-hero-3-subtitle{
+    font-weight: 500 !important;
+    font-size: 15px !important;
+    line-height: 25px !important;
+}

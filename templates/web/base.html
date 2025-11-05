@@ -1,0 +1,174 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Evente - Conference and Event HTML Template</title>
+    <meta name="description" content="Evente - Conference and Event HTML Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'web/assets/img/logo/favicon.png' %}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'web/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/flaticon_mycollection.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/odometer.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/default.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/custom.css' %}">
+</head>
+
+<body>
+
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- Scroll-top -->
+    <button class="scroll__top scroll-to-target" data-target="html">
+        <i class="fa-sharp fa-regular fa-arrow-up"></i>
+    </button>
+    <!-- Scroll-top-end-->
+
+    <!-- header-search -->
+    <div class="search__popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search__wrapper">
+                        <div class="search__close">
+                            <button type="button" class="search-close-btn">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                    <path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="search__form">
+                            <form action="#">
+                                <div class="search__input">
+                                    <input class="search-input-field" type="text" placeholder="Type keywords here">
+                                    <span class="search-focus-border"></span>
+                                    <button type="submit">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-popup-overlay"></div>
+    <!-- header-search-end -->
+
+    <!-- cart mini area start -->
+    <div class="cartmini__area">
+        <div class="cartmini__wrapper d-flex justify-content-between flex-column">
+            <div class="cartmini__top-wrapper ">
+                <div class="cartmini__top p-relative">
+                    <div class="cartmini__title">
+                        <h4>Your cart</h4>
+                    </div>
+                    <div class="cartmini__close">
+                        <button type="button" class="cartmini__close-btn cartmini-close-btn"><i class="fal fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="cartmini__widget">
+                    <div class="cartmini__widget-item">
+                        <div class="cartmini__thumb">
+                            <a href="product-details.html">
+                                <img src="{% static 'web/assets/img/shop/sm-product-1.jpg' %}" alt="">
+                            </a>
+                        </div>
+                        <div class="cartmini__content">
+                            <h5><a href="product-details.html">Colmi Smart Wathc</a></h5>
+                            <div class="cartmini__price-wrapper">
+                                <span class="cartmini__price">$36.00</span>
+                            </div>
+                        </div>
+                        <button class="cartmini__del"><i class="fal fa-times"></i></button>
+                    </div>
+                    <div class="cartmini__widget-item">
+                        <div class="cartmini__thumb">
+                            <a href="product-details.html">
+                                <img src="{% static 'web/assets/img/shop/sm-product-2.jpg' %}" alt="">
+                            </a>
+                        </div>
+                        <div class="cartmini__content">
+                            <h5><a href="product-details.html">Apple Air Pods</a></h5>
+                            <div class="cartmini__price-wrapper">
+                                <span class="cartmini__price">$28.00</span>
+                            </div>
+                        </div>
+                        <button class="cartmini__del"><i class="fal fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- for wp -->
+            </div>
+            <div class="cartmini__checkout">
+                <div class="cartmini__checkout-title mb-30">
+                    <h4>Subtotal:</h4>
+                    <span>$113.00</span>
+                </div>
+                <div class="cartmini__checkout-btn">
+                    <a href="#" class="cartmini-btn mb-10 w-100"> <span></span> view cart</a>
+                    <a href="#" class="cartmini-btn-border w-100"> <span></span> checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-overlay"></div>
+    <!-- cart mini area end -->
+
+    {% include "web/partials/header.html" %}
+
+    <!-- main-area -->
+    <main>
+    {% block content %} {% endblock %}
+    </main>
+    <!-- main-area-end -->
+
+    {% include "web/partials/footer.html" %}
+
+
+    <!-- JS here -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery.js' %}"></script>
+    <script src="{% static 'web/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/ion.rangeSlider.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/jquery.odometer.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/jquery-appear.js' %}"></script>
+    <script src="{% static 'web/assets/js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/Jarallax.js' %}"></script>
+    <script src="{% static 'web/assets/js/nice-select.js' %}"></script>
+    <script src="{% static 'web/assets/js/ajax-form.js' %}"></script>
+    <script src="{% static 'web/assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/main.js' %}"></script>
+
+    {% block javascript %} {% endblock %}
+</body>
+
+</html>
