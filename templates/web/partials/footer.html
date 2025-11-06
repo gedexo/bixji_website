@@ -9,10 +9,9 @@
                             <div class="td-footer-logo mb-20">
                                 <a href="index-2.html"><img src="{% static 'web/assets/img/logo/logo-white.png' %}" alt="logo"></a>
                             </div>
-                            <p class="text mb-10">Middlest 2 East 42nd Streearketplace
-                                New York, NY 10017</p>
-                            <a class="number mb-10 d-inline-block" href="tel:+123(55)90067990">+123(55) 90067990</a>
-                            <a class="email" href="mailto:info@gmail.com">info@gmail.com</a>
+                            <p class="text mb-10">Kondotty, Kerala</p>
+                            <a class="number mb-10 d-inline-block" href="tel:+919847520679">+91 9847520679</a>
+                            <a class="email" href="mailto:info@bixji.com">info@bixji.com</a>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-7">
@@ -22,21 +21,20 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="td-footer-links">
                                         <ul>
-                                            <li><a href="#">About this Event</a></li>
-                                            <li><a href="#">Venue</a></li>
-                                            <li><a href="#">Speakers</a></li>
-                                            <li><a href="#">Agenda</a></li>
-                                            <li><a href="#">Sponsors</a></li>
+                                            <li><a href="{% url 'web:index' %}">Home</a></li>
+                                            <li><a href="{% url 'web:about' %}">About</a></li>
+                                            <li><a href="{% url 'web:bixji_talks' %}">Bixji Talks</a></li>
+                                            <li><a href="{% url 'web:magazines' %}">Magazines</a></li>
+                                            <li><a href="{% url 'web:awards' %}">Awards</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="td-footer-links">
                                         <ul>
-                                            <li><a href="#">News</a></li>
-                                            <li><a href="#">Get Tickets</a></li>
-                                            <li><a href="#">Benefits</a></li>
-                                            <li><a href="#">Contact Us</a></li>
+                                            <li><a href="{% url 'web:clubs' %}">Clubs</a></li>
+                                            <li><a href="{% url 'web:events' %}">Events</a></li>
+                                            <li><a href="{% url 'web:contact' %}">Contact Us</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -65,7 +63,7 @@
                             <div class="row align-items-center">
                                 <div class="col-md-9">
                                     <div class="td-footer-bottom-copyright mb-30">
-                                        <p>Copyright © 2025 evente.com. All rights reserved.</p>
+                                        <p>Copyright {% now 'Y' %}, All Right reserved by <a href="https://bixji.in/" target="_blank"> BIXJI.</a></p>
                                     </div>
                                 </div>
                                 <div class="col-md-3">

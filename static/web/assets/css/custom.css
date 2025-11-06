@@ -16,16 +16,102 @@ div:where(.swal2-container) div:where(.swal2-html-container) {
 div:where(.swal2-container) h2:where(.swal2-title){
     font-size: 25px !important;
 }
+@media (min-width: 991px) {
+    .td-hero-3-title {
+        font-weight: 700;
+        font-size: 60px !important;
+        line-height: 123%;
+        color: var(--td-common-white);
+    }
 
-.td-hero-3-title {
-    font-weight: 700;
-    font-size: 60px !important;
-    line-height: 123%;
-    color: var(--td-common-white);
+    .td-hero-3-subtitle{
+        font-weight: 500 !important;
+        font-size: 15px !important;
+        line-height: 25px !important;
+        width:75% !important;
+    }
+
+    .td-cetagory-tittle {
+        font-weight: 500 !important;
+        line-height: 25px !important;
+        font-size: 18px !important;
+        text-transform: capitalize;
+    }
+    
 }
 
-.td-hero-3-subtitle{
+@media (max-width: 991px) {
+    .td-hero-3-subtitle {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--td-common-white);
+    font-size: 15px;
+    line-height: 25px;
+    }
+
+}
+
+.td-hero-area {
+    height: 100% !important;
+}
+
+.td-btn {
+    border-radius: 5px !important;
+}
+
+.td-cetagory-thumb img{
+    height: 550px;
+    object-fit: cover;
+}
+
+.td-hero-area {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.td-hero-3-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-video-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* adjust opacity here */
+  z-index: 2;
+}
+
+.td-hero-3-content {
+  position: relative;
+  z-index: 3; /* above overlay */
+  color: #fff;
+}
+
+.td-blog-2-item .td-blog-thumb img {
+    border-radius: 20px;
+    height: 390px !important;
+    object-fit: cover !important;
+}
+.td-blog-title {
     font-weight: 500 !important;
-    font-size: 15px !important;
-    line-height: 25px !important;
+    font-size: 18px !important;
+    line-height: 127%;
+    display: flex !important;
+    justify-content: center !important;
+    text-transform: capitalize;
+    color: var(--td-common-black-2);
+}
+.td-schedule-3-user img{
+    height: 50px !important;
+    width: 50px !important;
+    object-fit: cover !important;
 }

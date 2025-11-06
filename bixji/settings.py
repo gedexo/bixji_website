@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "web",
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -97,32 +98,28 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
-
-
 USE_L10N = False
+
+TIME_FORMAT = "h:i A"
+DATETIME_FORMAT = "N j, Y, h:i A"
+
 DATE_INPUT_FORMATS = (
     "%d/%m/%Y",
     "%d-%m-%Y",
     "%d/%m/%y",
     "%d %b %Y",
     "%d %b, %Y",
-    "%d %b %Y",
-    "%d %b, %Y",
     "%d %B, %Y",
     "%d %B %Y",
 )
+
+# Include both 12-hour and 24-hour input formats for flexibility
 DATETIME_INPUT_FORMATS = (
-    "%d/%m/%Y %H:%M:%S",
-    "%d/%m/%Y %H:%M",
-    "%d/%m/%Y",
-    "%d/%m/%y %H:%M:%S",
-    "%d/%m/%y %H:%M",
-    "%d/%m/%y",
-    "%Y-%m-%d %H:%M:%S",
+    "%d/%m/%Y %I:%M %p",  # 12-hour format with AM/PM
+    "%d/%m/%Y %H:%M",     # 24-hour fallback
+    "%Y-%m-%d %I:%M %p",
     "%Y-%m-%d %H:%M",
-    "%Y-%m-%d",
 )
 
 # Static files (CSS, JavaScript, Images)

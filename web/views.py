@@ -4,15 +4,69 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from . import forms
-from .models import Banners
+from .models import Banners, Magazine, Award, Club, Event, BixjiTalk, Testimonial, FAQ, Team
 
 
 def index(request):
     context = {
         "is_index":True,
         "banners": Banners.objects.all(),
+        "magazines": Magazine.objects.all()[:6],
+        "awards": Award.objects.all()[:3],
+        "clubs": Club.objects.all()[:3],
+        "events": Event.objects.all()[:3],
     }
     return render(request, 'web/index.html', context)
+
+
+def about(request):
+    context = {
+        "is_about": True,
+        "testimonials": Testimonial.objects.all(),
+        "faqs": FAQ.objects.all(),
+        "teams": Team.objects.all(),
+    }
+    return render(request, "web/about.html", context)
+
+
+def bixji_talks(request):
+    context = {
+        "is_bixji_talks": True,
+        "bixji_talks": BixjiTalk.objects.all(),
+    }
+    return render(request, "web/bixji_talks.html", context)
+
+
+def magazines(request):
+    context = {
+        "is_magazines": True,
+        "magazines": Magazine.objects.all(),
+    }
+    return render(request, "web/magazines.html", context)
+
+
+def awards(request):
+    context = {
+        "is_awards": True,
+        "awards": Award.objects.all(),
+    }
+    return render(request, "web/awards.html", context)
+
+
+def clubs(request):
+    context = {
+        "is_clubs": True,
+        "clubs": Club.objects.all(),
+    }
+    return render(request, "web/clubs.html", context)
+
+
+def events(request):
+    context = {
+        "is_events": True,
+        "events": Event.objects.all(),
+    }
+    return render(request, "web/events.html", context)
 
 
 def contact(request):
