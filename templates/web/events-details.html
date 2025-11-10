@@ -1,0 +1,238 @@
+{% extends "web/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- td-breadcrumb-area-start -->
+<div class="td-breadcrumb-area td-breadcrumb-spacing bg-position" data-background="{% static 'web/assets/img/breadcrumb/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="td-breadcrumb-title-wrap">
+                    <h2 class="td-breadcrumb-title mb-10 wow td-animetion-left" data-wow-duration="1.5s" data-wow-delay="0.3s">{{ event.title }}</h2>
+                    <div class="td-breadcrumb-list wow td-animetion-right" data-wow-duration="1.5s" data-wow-delay="0.3s">
+                        <ul>
+                            <li><a href="{% url 'web:index' %}">Home</a></li>
+                            <li><i class="fa-sharp fa-solid fa-angle-right fa-fw"></i></li>
+                            <li>Events</li>
+                            <li><i class="fa-sharp fa-solid fa-angle-right fa-fw"></i></li>
+                            <li class="pages">{{ event.title }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- td-breadcrumb-area-end -->
+
+<!-- td-schedule-details-area-start -->
+<div class="td-schedule-details-area pt-80 pb-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="td-schedule-details-left mb-40">
+                    <div class="td-schedule-details-thumb mb-25">
+                        <img class="w-100 wow td-animetion-top" data-wow-duration="1.5s" data-wow-delay="0.3s" src="{{ event.image.url }}" alt="{{ event.title }}">
+                    </div>
+                    <div class="td-schedule-details-content">
+                        <h2 class="td-schedule-details-title mb-25">{{ event.title }}</h2>
+                        <div>
+                            {{event.description|safe}}
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="td-schedule-details-right ml-40 mb-40">
+                    <div class="td-schedule-details-right-list grey-bg mb-40">
+                        <h3 class="td-schedule-team-title mb-15">Information</h3>
+                        <span class="td-schedule-team-border mb-15"></span>
+                        <div class="td-schedule-details-info-list">
+                            <ul>
+                                <li>
+                                    <span class="ceta">Title:</span>
+                                    <span>{{ event.title }}</span>
+                                </li>
+                                <li>
+                                    <span class="ceta">Date:</span>
+                                    <span>{{ event.date_time|date:"F j, Y" }}</span>
+                                </li>
+                                <li>
+                                    <span class="ceta">Time:</span>
+                                    <span>{{ event.date_time|date:"g:i a"    }}</span>
+                                </li>
+                               
+                                <li>
+                                    <span class="ceta">Location:</span>
+                                    <span>{{ event.location }}</span>
+                                </li>
+                                <li>
+                                    <span class="ceta">Author:</span>
+                                    <span>{{ event.author }}</span>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="td-schedule-details-right-list grey-bg">
+                        <h3 class="td-schedule-team-title mb-15">Register for Event</h3>
+                        <span class="td-schedule-team-border mb-15"></span>
+                        <div class="td-schedule-details-form">
+                            <form action="#" method="POST" id="eventRegisterForm">
+                                {% csrf_token %}
+                                <div class="td-schedule-details-input mb-20">
+                                    {{form.name}}
+                                </div>
+                                <div class="td-schedule-details-input mb-20">
+                                    {{form.email}}
+                                </div>
+                                <div class="td-schedule-details-input mb-20">
+                                    {{form.phone}}
+                                </div>
+                                <div class="td-schedule-details-input mb-20">
+                                    {{form.sloat}}
+                                </div> 
+                                <div class="td-schedule-details-input mb-20">
+                                    <div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}"></div>    
+                                </div>  
+                                <div class="td-schedule-details-total-btn mb-35">
+                                    <button type="submit" id="submitBtn" class="td-btn w-100 d-flex align-items-center justify-content-center gap-2">
+                                        <span class="btn-text">Register Now</span>
+                                        <span class="btn-loader spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- td-schedule-details-area-end -->
+ 
+{% endblock %}
+
+{% block javascript %}
+<script>
+document.getElementById('eventRegisterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoader = submitBtn.querySelector('.btn-loader');
+
+    // Show loader
+    btnText.style.display = 'none';
+    btnLoader.style.display = 'inline-block';
+    submitBtn.disabled = true;
+
+    const formData = new FormData(this);
+
+    fetch("{% url 'web:event_detail' event.slug %}", {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Hide loader
+        btnText.style.display = 'inline-block';
+        btnLoader.style.display = 'none';
+        submitBtn.disabled = false;
+
+        if (data.status === 'true') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#25d366', // WhatsApp green
+                background: '#ffffff',
+                color: '#333333',
+                customClass: {
+                    popup: 'rounded-3 shadow-sm p-2',
+                    title: 'fw-semibold',
+                    confirmButton: 'px-4 py-2 rounded-3'
+                },
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            }).then(() => {
+                // Redirect to WhatsApp after clicking OK
+                if (data.whatsapp_url) {
+                    window.open(data.whatsapp_url, '_blank');
+                }
+            });
+
+            // Reset form
+            this.reset();
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset();
+            }
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#5033ff',
+                background: '#ffffff',
+                color: '#333333',
+                customClass: {
+                    popup: 'rounded-3 shadow-sm p-2',
+                    title: 'fw-semibold',
+                    confirmButton: 'px-4 py-2 rounded-3'
+                },
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset();
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+
+        // Hide loader
+        btnText.style.display = 'inline-block';
+        btnLoader.style.display = 'none';
+        submitBtn.disabled = false;
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Something went wrong. Please try again later.',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#5033ff',
+            background: '#ffffff',
+            color: '#333333',
+            customClass: {
+                popup: 'rounded-3 shadow-sm p-2',
+                title: 'fw-semibold',
+                confirmButton: 'px-4 py-2 rounded-3'
+            },
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

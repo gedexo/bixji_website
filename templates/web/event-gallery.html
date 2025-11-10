@@ -1,0 +1,94 @@
+{% extends "web/base.html" %}   
+{% load static %}
+{% block content %}
+
+<!-- td-breadcrumb-area-start -->
+<div class="td-breadcrumb-area td-breadcrumb-spacing bg-position" data-background="{% static 'web/assets/img/breadcrumb/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="td-breadcrumb-title-wrap">
+                    <h2 class="td-breadcrumb-title mb-10 wow td-animetion-left" data-wow-duration="1.5s" data-wow-delay="0.2s">Event Gallery</h2>
+                    <div class="td-breadcrumb-list wow td-animetion-right" data-wow-duration="1.5s" data-wow-delay="0.3s">
+                        <ul>
+                            <li><a href="{% url 'web:index' %}">Home</a></li>
+                            <li><i class="fa-sharp fa-solid fa-angle-right fa-fw"></i></li>
+                            <li class="pages">Event Gallery</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- td-breadcrumb-area-end -->
+
+<!-- td-gallery-area-start -->
+<div class="td-gallery-area pt-80 pb-80">
+    <div class="container">
+        <div class="row">
+            <div class="td-about-title-wrap text-center mb-30 wow fadeInUp" data-wow-duration=".9s" data-wow-delay=".4s">
+                <h2 class="td-section-title">A Legacy in Frames.</h2>
+                <p class="td-subtitle">Experience the highlights of Bixji’s finest moments.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="nav td-schedule-tab-btn td-schedule-3-tab-btn justify-content-center mb-50 wow fadeInUp" 
+                 data-wow-duration="1.5s" data-wow-delay="0.5s" id="eventFilterTabs">
+                <button class="nav-link active" data-filter="all">All</button>
+                {% for event in events %}
+                    <button class="nav-link" data-filter="event-{{event.id}}">{{event.title}}</button>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="row" id="eventGalleryGrid">
+            {% for gallery in event_galleries %}
+            <div class="col-lg-4 col-md-6 col-sm-6 gallery-item event-{{gallery.event.id}}">
+                <div class="td-gallery-wrap mb-25">
+                    <a class="popup-image" href="{{gallery.image.url}}">
+                        <div class="td-gallery-thumb p-relative">
+                            <img class="w-100" src="{{gallery.image.url}}" alt="{{gallery.event.title}}">
+                            <div class="td-gallery-icon p-absulute">
+                                <span><i class="flaticon-up-right-arrow"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- td-gallery-area-end -->
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const filterButtons = document.querySelectorAll("#eventFilterTabs button");
+    const galleryItems = document.querySelectorAll(".gallery-item");
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", function() {
+            const filter = this.getAttribute("data-filter");
+
+            // Active button state
+            filterButtons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            // Filter logic
+            galleryItems.forEach(item => {
+                if (filter === "all" || item.classList.contains(filter)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

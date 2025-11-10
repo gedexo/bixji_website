@@ -32,7 +32,7 @@
                     </span>
 
                     <div class="flex-wrap gap-3 mt-30">
-                        <a class="td-btn td-left-right wow  td-animetion-top mb-2" data-wow-duration="1.5s" data-wow-delay="0.9s" href="about.html" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.9s; animation-name: td-animetion-top;">
+                        <a class="td-btn td-left-right wow  td-animetion-top mb-2" data-wow-duration="1.5s" data-wow-delay="0.9s" href="{% url 'web:bixji_talks' %}" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.9s; animation-name: td-animetion-top;">
                             <span class="mr10 td-text d-inline-block mr-5">Bixji Talks</span>
                             <span class="td-arrow-angle">
                                 <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@
                             </span>
                         </a>
 
-                        <a class="td-btn td-left-right wow  td-animetion-top mb-2" data-wow-duration="1.5s" data-wow-delay="0.9s" href="about.html" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.9s; animation-name: td-animetion-top;">
+                        <a class="td-btn td-left-right wow  td-animetion-top mb-2" data-wow-duration="1.5s" data-wow-delay="0.9s" href="{% url 'web:clubs' %}" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.9s; animation-name: td-animetion-top;">
                             <span class="mr10 td-text d-inline-block mr-5">Join the Club</span>
                             <span class="td-arrow-angle">
                                 <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,7 @@
                             </span>
                         </a>
 
-                        <a class="td-btn td-left-right wow  td-animetion-top mb-2" data-wow-duration="1.5s" data-wow-delay="0.9s" href="about.html" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.9s; animation-name: td-animetion-top;">
+                        <a class="td-btn td-left-right wow  td-animetion-top mb-2" data-wow-duration="1.5s" data-wow-delay="0.9s" href="{% url 'web:awards' %}" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.9s; animation-name: td-animetion-top;">
                             <span class="mr10 td-text d-inline-block mr-5">Nominate for Award</span>
                             <span class="td-arrow-angle">
                                 <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +115,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="td-btn td-left-right" href="about.html">
+                    <a class="td-btn td-left-right" href="{% url 'web:about' %}">
                         <span class="mr10 td-text d-inline-block mr-5">Learn More About Bixji</span>
                         <span class="td-arrow-angle">
                             <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -158,7 +158,7 @@
             </div>
         </div>
         <div class="text-center mt-4">
-            <a class="td-btn td-left-right" href="about.html">
+            <a class="td-btn td-left-right" href="{% url 'web:bixji_talks' %}">
                 <span class="mr10 td-text d-inline-block mr-5">Watch Episodes</span>
                 <span class="td-arrow-angle">
                     <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +200,7 @@
             {% endfor %}
 
             <div class="text-center mt-4">
-                <a class="td-btn td-left-right" href="about.html">
+                <a class="td-btn td-left-right" href="{% url 'web:magazines' %}">
                     <span class="mr10 td-text d-inline-block mr-5">View All Magazines</span>
                     <span class="td-arrow-angle">
                         <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -244,7 +244,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a class="td-btn td-left-right" href="about.html">
+            <a class="td-btn td-left-right" href="{% url 'web:awards' %}">
                 <span class="mr10 td-text d-inline-block mr-5">View All Awards</span>
                 <span class="td-arrow-angle">
                     <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -302,7 +302,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a class="td-btn td-left-right" href="about.html">
+            <a class="td-btn td-left-right" href="{% url 'web:clubs' %}">
                 <span class="mr10 td-text d-inline-block mr-5">View All Clubs</span>
                 <span class="td-arrow-angle">
                     <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -385,7 +385,7 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a class="td-btn td-left-right" href="about.html">
+                <a class="td-btn td-left-right" href="{% url 'web:events' %}">
                     <span class="mr10 td-text d-inline-block mr-5">View Upcoming Events</span>
                     <span class="td-arrow-angle">
                         <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -25,10 +25,15 @@
 
 
 <!-- td-award-area-start -->
-<div class="td-blog-area pt-140 pb-90">
+<div class="td-blog-area pt-80 pb-80">
     <div class="container">
         
         <div class="row">
+            <div class="td-about-title-wrap text-center mb-30  wow fadeInUp" data-wow-duration=".9s" data-wow-delay=".4s">
+                <h2 class="td-section-title">Bixji Awards – Recognizing the Leaders of Tomorrow.</h2>
+                <p class="td-subtitle">Annual celebration honoring exceptional talent and innovation.</p>
+            </div>
+
             {% for award in awards %}
             <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.3s">
                 <div class="td-blog-item td-blog-2-item mb-30">
@@ -36,7 +41,7 @@
                         <img class="w-100" src="{{award.image.url}}" alt="{{award.title}}">
                     </div>
                     <div class="td-blog-2-content">
-                        <h3 class="td-blog-title mb-20"><a class="underline-black" href="blog-details.html">{{award.title}}</a></h3>
+                        <h3 class="td-blog-title mb-20"><a class="underline-black" href="{{award.get_absolute_url}}">{{award.title}}</a></h3>
                     </div>
                 </div>
             </div>

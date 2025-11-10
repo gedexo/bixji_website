@@ -51,9 +51,19 @@
                                             <li class="{% if is_about %}active{% endif %}"><a href="{% url 'web:about' %}">About</a></li>
                                             <li class="{% if is_bixji_talks %}active{% endif %}"><a href="{% url 'web:bixji_talks' %}">Bixji Talks</a></li>
                                             <li class="{% if is_magazines %}active{% endif %}"><a href="{% url 'web:magazines' %}">Magazines</a></li>
-                                            <li class="{% if is_awards %}active{% endif %}"><a href="{% url 'web:awards' %}">Awards</a></li>
+                                            <li class="menu-item-has-children {% if is_awards %}active{% endif %}"><a href="javascript:void(0)">Awards</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="{% url 'web:awards' %}">Awards</a></li>
+                                                    <li><a href="{% url 'web:awards_gallery' %}">Awards Gallery</a></li>
+                                                </ul>
+                                            </li>
                                             <li class="{% if is_clubs %}active{% endif %}"><a href="{% url 'web:clubs' %}">Clubs</a></li>
-                                            <li class="{% if is_events %}active{% endif %}"><a href="{% url 'web:events' %}">Events</a></li>
+                                            <li class="menu-item-has-children {% if is_events %}active{% endif %}"><a href="javascript:void(0)">Events</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="{% url 'web:events' %}">Events</a></li>
+                                                    <li><a href="{% url 'web:event_gallery' %}">Events Gallery</a></li>
+                                                </ul>
+                                            </li>
                                             <li class="{% if is_contact %}active{% endif %}"><a href="{% url 'web:contact' %}">Contact</a></li>
                                         </ul>
                                     </div>

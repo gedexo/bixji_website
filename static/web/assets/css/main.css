@@ -5439,13 +5439,13 @@ textarea {
     display: none;
   }
 }
-.td-schedule-3-tab-btn {
+/* .td-schedule-3-tab-btn {
   padding: 33px 30px 8px 30px;
   box-shadow: 0 0 10px 0 #eef1f1;
   background: var(--td-common-white);
   border: 1px solid #e7e5e9;
   border-radius: 100px;
-}
+} */
 @media (max-width: 575px) {
   .td-schedule-3-tab-btn {
     border-radius: 10px;

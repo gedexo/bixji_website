@@ -10,7 +10,7 @@
                     <h2 class="td-breadcrumb-title mb-10 wow td-animetion-left" data-wow-duration="1.5s" data-wow-delay="0.3s">Contact With Us</h2>
                     <div class="td-breadcrumb-list wow td-animetion-right" data-wow-duration="1.5s" data-wow-delay="0.3s">
                         <ul>
-                            <li><a href="index-2.html">Home</a></li>
+                            <li><a href="{% url 'web:index' %}">Home</a></li>
                             <li><i class="fa-sharp fa-solid fa-angle-right fa-fw"></i></li>
                             <li class="pages">Contact</li>
                         </ul>
@@ -114,8 +114,11 @@
                                 <div class="col-md-12">
                                     <div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}"></div>
                                 </div>
-                                <div class="col-12">
-                                    <button type="submit" class="td-btn">Submit Your Message</button>
+                               <div class="col-12">
+                                    <button type="submit" id="submitBtn" class="td-btn d-flex align-items-center justify-content-center gap-2">
+                                        <span class="btn-text">Submit Your Message</span>
+                                        <span class="btn-loader spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                                    </button>
                                 </div>
                                 <p class="ajax-response pt-20"></p>
                             </div>
@@ -130,96 +133,128 @@
 
 
 {% endblock %}
+
 {% block javascript %}
 <script>
-    $(document).ready(function() {
-        $("#contactForm").submit(function(event) {
-            event.preventDefault(); 
-            
-            var formData = $(this).serialize();  
-            
-            $.ajax({
-                type: "POST",
-                url: "{% url 'web:contact' %}",  
-                data: formData,
-                dataType: "json",
-                success: function(response) {
-                    if (response.status === "true") {
-                        Swal.fire({
-                            icon: "success",
-                            title: response.title,
-                            text: response.message,
-                            showCancelButton: true,
-                            confirmButtonText: "OK",
-                            cancelButtonText: "WhatsApp",
-                            background: "#ffffff",
-                            color: "#333333",
-                            confirmButtonColor: "#28a745", // Green for success
-                            cancelButtonColor: "#25d366", // WhatsApp green
-                            customClass: {
-                                popup: 'rounded-3 shadow-sm p-2',
-                                title: 'fw-semibold',
-                                confirmButton: 'px-4 py-2 rounded-3',
-                                cancelButton: 'px-4 py-2 rounded-3'
-                            },
-                            showClass: {
-                                popup: 'animate__animated animate__fadeInDown'
-                            },
-                            hideClass: {
-                                popup: 'animate__animated animate__fadeOutUp'
-                            }
-                        }).then((result) => {
-                            if (result.dismiss === Swal.DismissReason.cancel) {
-                                window.open(response.whatsapp_url, "_blank");
-                            }
-                        });
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-                        $("#contactForm")[0].reset();  
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: response.title,
-                            text: response.message,
-                            background: "#ffffff",
-                            color: "#333333",
-                            confirmButtonColor: "#dc3545", // Red for error
-                            customClass: {
-                                popup: 'rounded-3 shadow-sm p-2',
-                                title: 'fw-semibold',
-                                confirmButton: 'px-4 py-2 rounded-3',
-                            },
-                            showClass: {
-                                popup: 'animate__animated animate__fadeInDown'
-                            },
-                            hideClass: {
-                                popup: 'animate__animated animate__fadeOutUp'
-                            }
-                        });
-                    }
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoader = submitBtn.querySelector('.btn-loader');
+
+    // Show loader
+    btnText.style.display = 'none';
+    btnLoader.style.display = 'inline-block';
+    submitBtn.disabled = true;
+
+    const formData = new FormData(this);
+
+    fetch('{% url "web:contact" %}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Hide loader
+        btnText.style.display = 'inline-block';
+        btnLoader.style.display = 'none';
+        submitBtn.disabled = false;
+
+        if (data.status === 'true') {
+            // Success alert
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#25d366', // WhatsApp green
+                background: '#ffffff',
+                color: '#333333',
+                customClass: {
+                    popup: 'rounded-3 shadow-sm p-2',
+                    title: 'fw-semibold',
+                    confirmButton: 'px-4 py-2 rounded-3'
                 },
-                error: function() {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Submission Failed",
-                        text: "Something went wrong. Please try again later.",
-                        background: "#ffffff",
-                        color: "#333333",
-                        confirmButtonColor: "#dc3545",
-                        customClass: {
-                            popup: 'rounded-3 shadow-sm p-2',
-                            title: 'fw-semibold',
-                            confirmButton: 'px-4 py-2 rounded-3',
-                        },
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    });
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            }).then(() => {
+                // Redirect to WhatsApp after clicking OK
+                if (data.whatsapp_url) {
+                    window.open(data.whatsapp_url, '_blank');
                 }
             });
+
+            // Reset form
+            this.reset();
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset();
+            }
+
+        } else {
+            // Error alert
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#5033ff',
+                background: '#ffffff',
+                color: '#333333',
+                customClass: {
+                    popup: 'rounded-3 shadow-sm p-2',
+                    title: 'fw-semibold',
+                    confirmButton: 'px-4 py-2 rounded-3'
+                },
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset();
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+
+        // Hide loader
+        btnText.style.display = 'inline-block';
+        btnLoader.style.display = 'none';
+        submitBtn.disabled = false;
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Something went wrong. Please try again later.',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#5033ff',
+            background: '#ffffff',
+            color: '#333333',
+            customClass: {
+                popup: 'rounded-3 shadow-sm p-2',
+                title: 'fw-semibold',
+                confirmButton: 'px-4 py-2 rounded-3'
+            },
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
         });
     });
+});
 </script>
 {% endblock %}

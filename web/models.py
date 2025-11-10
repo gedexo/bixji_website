@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+from django.urls import reverse_lazy
 
 
 class Contact(models.Model):
@@ -61,12 +62,15 @@ class Award(models.Model):
     def __str__(self):
         return self.title
     
+    def get_absolute_url(self):
+        return reverse_lazy("web:award_detail", kwargs={"slug": self.slug}) 
+    
     class Meta:
         verbose_name = 'Award'
         verbose_name_plural = 'Awards'
 
     
-class AwardImages(models.Model):
+class AwardGallery(models.Model):
     award = models.ForeignKey(Award, on_delete=models.CASCADE, related_name='award_images')
     image = models.ImageField(upload_to='award_images/')
 
@@ -74,8 +78,23 @@ class AwardImages(models.Model):
         return f"Image for {self.award.title}"
     
     class Meta:
-        verbose_name = 'Award Image'
-        verbose_name_plural = 'Award Images'
+        verbose_name = 'Award Gallery'
+        verbose_name_plural = 'Award Galleries'
+
+
+class AwardNomination(models.Model):
+    award = models.ForeignKey(Award, on_delete=models.CASCADE,)
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.PositiveIntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Award Nomination'
+        verbose_name_plural = 'Award Nominations'
 
     
 class Club(models.Model):
@@ -87,9 +106,23 @@ class Club(models.Model):
     def __str__(self):
         return self.name
     
+    def get_absolute_url(self):
+        return reverse_lazy("web:club_detail", kwargs={"slug": self.slug})
+    
     class Meta:
         verbose_name = 'Club'
         verbose_name_plural = 'Clubs'
+
+    
+class ClubRegistration(models.Model):
+    club = models.ForeignKey(Club, on_delete=models.CASCADE,)
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.PositiveIntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 
     
 class Event(models.Model):
@@ -105,9 +138,43 @@ class Event(models.Model):
     def __str__(self):
         return self.title
     
+    def get_absolute_url(self):
+        return reverse_lazy("web:event_detail", kwargs={"slug": self.slug})
+    
+    def get_event_images(self):
+        return EventGallery.objects.filter(event=self)
+    
     class Meta:
         verbose_name = 'Event'
         verbose_name_plural = 'Events'
+
+    
+class EventRegistration(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE,)
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.PositiveIntegerField()
+    sloat = models.PositiveIntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Registration for {self.event.title} by {self.name}"
+    
+    class Meta:
+        verbose_name = 'Event Registration'
+        verbose_name_plural = 'Event Registrations'
+
+    
+class EventGallery(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE,)
+    image = models.ImageField(upload_to='event_galleries/')
+
+    def __str__(self):
+        return f"Gallery for {self.event.title}"
+    
+    class Meta:
+        verbose_name = 'Event Gallery'
+        verbose_name_plural = 'Event Galleries'
 
     
 class BixjiTalk(models.Model):
@@ -121,6 +188,22 @@ class BixjiTalk(models.Model):
     class Meta:
         verbose_name = 'Bixji Talk'
         verbose_name_plural = 'Bixji Talks'
+
+
+class BixjiTalkEnquiry(models.Model):
+    name = models.CharField(max_length=200)
+    profession = models.CharField(max_length=100)   
+    bio = models.TextField()    
+    social_link = models.TextField()
+    short_video_link = models.URLField(help_text="Link to the short video (e.g., YouTube, Instagram link)")
+    timestamp = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.name 
+
+    class Meta:
+        verbose_name = 'Bixji Talk Enquiry'
+        verbose_name_plural = 'Bixji Talk Enquiries'
 
     
 class Team(models.Model):
@@ -138,7 +221,7 @@ class Team(models.Model):
     
 class FAQ(models.Model):
     question = models.CharField(max_length=300)
-    answer = HTMLField()
+    answer = models.TextField()
 
     def __str__(self):
         return self.question

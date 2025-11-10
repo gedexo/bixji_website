@@ -23,12 +23,16 @@
 </div>
 <!-- td-breadcrumb-area-end -->
 
-
-<!-- td-schedule-area-start -->
+    
+<!-- td-event-area-start -->
 <div class="td-schedule-area pt-80 pb-80 bg-position" data-background="{% static 'web/assets/img/schedule/schedule-4/bg.jpg' %}">
     <div class="container">
         
         <div class="row">
+            <div class="td-about-title-wrap text-center mb-30  wow fadeInUp" data-wow-duration=".9s" data-wow-delay=".4s">
+                <h2 class="td-section-title">Moments That Make History.</h2>
+                <p class="td-subtitle">Bixji hosts national events such as:</p>
+            </div>
             <div class="tp-contact-form-wrapper tp-black-bg9  tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade active show" id="v-pills-home1" role="tabpanel" aria-labelledby="v-pills-home1-tab">
                     {% for event in events %}
@@ -63,7 +67,7 @@
                                             </span>
                                             <div>
                                                 <h6 class="name">{{event.author}}</h6>
-                                                <span class="position">Author, Cleaner</span>
+                                                <span class="position">Author</span>
                                             </div>
                                         </div>
                                         <span class="dvdr"></span>
@@ -88,5 +92,5 @@
         </div>
     </div>
 </div>
-<!-- td-schedule-area-end -->
+<!-- td-event-area-end -->
 {% endblock %}

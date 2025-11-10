@@ -27,6 +27,10 @@
 <div class="td-gallery-area pt-80 pb-80">
     <div class="container">
         <div class="row">
+            <div class="td-about-title-wrap text-center mb-30 wow fadeInUp" data-wow-duration=".9s" data-wow-delay=".4s">
+                <h2 class="td-section-title">BixjiTalks – Every Voice Matters.</h2>
+                <p class="td-subtitle">Our flagship storytelling series featuring entrepreneurs, founders, influencers, artists, and social leaders.</p>
+            </div>
             {% for bixji_talk in bixji_talks %}
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="td-gallery-wrap mb-25">
@@ -46,4 +50,172 @@
 </div>
 <!-- td-bixji-talks-area-end -->
 
+<!-- Apply to Speak Button -->
+<div class="apply-btn-wrapper">
+    <button class="apply-btn" type="button" data-bs-toggle="modal" data-bs-target="#speakModal">
+        Apply to Speak
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="speakModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Apply to Speak</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="speakForm" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Name</label>
+                                {{ form.name }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Profession</label>
+                                {{ form.profession }}
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Bio</label>
+                                {{ form.bio }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Social Links</label>
+                                {{ form.social_link }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Video Link</label>
+                                {{ form.short_video_link }}
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="submit-btn" id="submitBtn">
+                                <span class="btn-text">Submit Application</span>
+                                <span class="btn-loader" style="display: none;">
+                                    <span class="spinner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+document.getElementById('speakForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoader = submitBtn.querySelector('.btn-loader');
+    
+    // Show loader
+    btnText.style.display = 'none';
+    btnLoader.style.display = 'inline-block';
+    submitBtn.disabled = true;
+    
+    const formData = new FormData(this);
+    
+    fetch('{% url "web:bixji_talks" %}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Hide loader
+        btnText.style.display = 'inline-block';
+        btnLoader.style.display = 'none';
+        submitBtn.disabled = false;
+        
+        if (data.status === 'true') {
+            // Close modal
+            bootstrap.Modal.getInstance(document.getElementById('speakModal')).hide();
+            
+            // Success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#5033ff'
+            }).then(() => {
+                if (data.whatsapp_url) {
+                    window.open(data.whatsapp_url, '_blank');
+                }
+            });
+            
+            // Reset form
+            this.reset();
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset();
+            }
+        } else {
+            // Error message
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#5033ff'
+            });
+            
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset();
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        
+        // Hide loader
+        btnText.style.display = 'inline-block';
+        btnLoader.style.display = 'none';
+        submitBtn.disabled = false;
+        
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Something went wrong. Please try again.',
+            confirmButtonColor: '#5033ff'
+        });
+    });
+});
+
+// Reset form on modal close
+document.getElementById('speakModal').addEventListener('hidden.bs.modal', function() {
+    document.getElementById('speakForm').reset();
+    if (typeof turnstile !== 'undefined') {
+        turnstile.reset();
+    }
+});
+</script>
 {% endblock %}
