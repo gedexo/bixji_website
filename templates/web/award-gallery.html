@@ -24,21 +24,32 @@
 <!-- td-breadcrumb-area-end -->
 
 <!-- td-gallery-area-start -->
-<div class="td-gallery-area pt-80 pb-80">
+<div class="td-gallery-area pt-30 pb-30">
     <div class="container">
         <div class="row">
             <div class="td-about-title-wrap text-center mb-30 wow fadeInUp" data-wow-duration=".9s" data-wow-delay=".4s">
                 <h2 class="td-section-title">A Legacy in Frames.</h2>
-                <p class="td-subtitle">Experience the highlights of Bixji’s finest moments.</p>
+                <p class="td-subtitle">Experience the highlights of Bixji's finest moments.</p>
             </div>
 
-            <!-- Filter Buttons -->
-            <div class="nav td-schedule-tab-btn td-schedule-3-tab-btn justify-content-center mb-50 wow fadeInUp" 
-                 data-wow-duration="1.5s" data-wow-delay="0.5s" id="awardFilterTabs">
-                <button class="nav-link active" data-filter="all">All</button>
-                {% for award in awards %}
-                    <button class="nav-link" data-filter="award-{{award.id}}">{{award.title}}</button>
-                {% endfor %}
+            <!-- Filter Buttons with Slider -->
+            <div class="td-filter-slider-wrapper mb-50 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
+                <div class="td-filter-slider-nav">
+                    <button class="td-filter-slider-prev" aria-label="Previous filters">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="td-filter-slider-container">
+                        <div class="nav td-schedule-tab-btn td-schedule-3-tab-btn" id="awardFilterTabs">
+                            <button class="nav-link active" data-filter="all">All</button>
+                            {% for award in awards %}
+                                <button class="nav-link" data-filter="award-{{award.id}}">{{award.title}}</button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <button class="td-filter-slider-next" aria-label="Next filters">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -65,12 +76,170 @@
 
 {% endblock %}
 
+{% block extra_css %}
+<style>
+/* Filter slider styles */
+.td-filter-slider-wrapper {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.td-filter-slider-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.td-filter-slider-container {
+    overflow: hidden;
+    width: calc(100% - 80px);
+    max-width: 100%;
+    position: relative;
+}
+
+#awardFilterTabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scroll-behavior: smooth;
+    padding: 10px 5px;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    cursor: grab;
+    justify-content: flex-start; /* Changed from center to flex-start */
+}
+
+#awardFilterTabs:active {
+    cursor: grabbing;
+}
+
+#awardFilterTabs::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+#awardFilterTabs button {
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 0 8px;
+    transition: all 0.3s ease;
+    min-width: max-content;
+}
+
+.td-filter-slider-prev,
+.td-filter-slider-next {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.td-filter-slider-prev:hover,
+.td-filter-slider-next:hover {
+    background: #e9e9e9;
+    border-color: #bbb;
+    transform: scale(1.05);
+}
+
+.td-filter-slider-prev:disabled,
+.td-filter-slider-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: #f5f5f5;
+    transform: none;
+}
+
+/* Ensure all buttons are visible by default */
+.td-filter-slider-container {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .td-filter-slider-container {
+        width: calc(100% - 60px);
+    }
+    
+    .td-filter-slider-prev,
+    .td-filter-slider-next {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .td-filter-slider-prev i,
+    .td-filter-slider-next i {
+        font-size: 14px;
+    }
+    
+    #awardFilterTabs button {
+        font-size: 14px;
+        padding: 10px 16px;
+        margin: 0 6px;
+    }
+    
+    .td-filter-slider-nav {
+        gap: 8px;
+    }
+    
+    /* Ensure first button is visible on mobile */
+    #awardFilterTabs {
+        padding-left: 10px; /* Add left padding to ensure first button is visible */
+    }
+}
+
+@media (max-width: 480px) {
+    .td-filter-slider-container {
+        width: calc(100% - 50px);
+    }
+    
+    #awardFilterTabs button {
+        font-size: 13px;
+        padding: 8px 12px;
+        margin: 0 4px;
+    }
+    
+    #awardFilterTabs {
+        padding-left: 5px; /* Smaller padding for very small screens */
+    }
+}
+
+/* Ensure the first button is always visible on initial load */
+.td-filter-slider-container::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: transparent;
+    pointer-events: none;
+}
+</style>
+{% endblock %}
+
 {% block javascript %}
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const filterButtons = document.querySelectorAll("#awardFilterTabs button");
     const galleryItems = document.querySelectorAll(".gallery-item");
-
+    const filterSlider = document.querySelector("#awardFilterTabs");
+    const prevButton = document.querySelector(".td-filter-slider-prev");
+    const nextButton = document.querySelector(".td-filter-slider-next");
+    
+    // Filter functionality
     filterButtons.forEach(btn => {
         btn.addEventListener("click", function() {
             const filter = this.getAttribute("data-filter");
@@ -89,6 +258,186 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     });
+    
+    // Slider functionality with improved scrolling
+    function updateSliderButtons() {
+        const scrollLeft = filterSlider.scrollLeft;
+        const maxScrollLeft = filterSlider.scrollWidth - filterSlider.clientWidth;
+        
+        // Add a small tolerance for floating point calculations
+        const tolerance = 5;
+        
+        prevButton.disabled = scrollLeft <= tolerance;
+        nextButton.disabled = scrollLeft >= maxScrollLeft - tolerance;
+        
+        // Update ARIA labels for better accessibility
+        prevButton.setAttribute('aria-hidden', prevButton.disabled);
+        nextButton.setAttribute('aria-hidden', nextButton.disabled);
+    }
+    
+    function scrollToButton(button) {
+        if (!button) return;
+        
+        const container = filterSlider.getBoundingClientRect();
+        const buttonRect = button.getBoundingClientRect();
+        const scrollLeft = filterSlider.scrollLeft;
+        
+        // Calculate the position to scroll to
+        const targetScroll = scrollLeft + (buttonRect.left - container.left) - (container.width / 2) + (buttonRect.width / 2);
+        
+        filterSlider.scrollTo({
+            left: targetScroll,
+            behavior: 'smooth'
+        });
+    }
+    
+    function scrollSlider(direction) {
+        const scrollAmount = filterSlider.clientWidth * 0.8; // Scroll 80% of container width
+        const currentScroll = filterSlider.scrollLeft;
+        const maxScrollLeft = filterSlider.scrollWidth - filterSlider.clientWidth;
+        
+        let newScroll;
+        if (direction === 'next') {
+            newScroll = Math.min(currentScroll + scrollAmount, maxScrollLeft);
+        } else {
+            newScroll = Math.max(currentScroll - scrollAmount, 0);
+        }
+        
+        filterSlider.scrollTo({
+            left: newScroll,
+            behavior: 'smooth'
+        });
+        
+        // Update button states after scroll completes
+        setTimeout(updateSliderButtons, 400);
+    }
+    
+    // Swipe functionality for mobile
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    
+    filterSlider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - filterSlider.offsetLeft;
+        currentX = startX;
+        filterSlider.style.cursor = 'grabbing';
+        filterSlider.style.scrollBehavior = 'auto';
+    });
+    
+    filterSlider.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        
+        const x = e.pageX - filterSlider.offsetLeft;
+        const walk = (currentX - x) * 2; // Scroll speed multiplier
+        filterSlider.scrollLeft += walk;
+        currentX = x;
+    });
+    
+    filterSlider.addEventListener('mouseup', () => {
+        isDragging = false;
+        filterSlider.style.cursor = 'grab';
+        filterSlider.style.scrollBehavior = 'smooth';
+        updateSliderButtons();
+    });
+    
+    filterSlider.addEventListener('mouseleave', () => {
+        isDragging = false;
+        filterSlider.style.cursor = 'grab';
+        filterSlider.style.scrollBehavior = 'smooth';
+    });
+    
+    // Touch events for mobile
+    filterSlider.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX - filterSlider.offsetLeft;
+        currentX = startX;
+        filterSlider.style.scrollBehavior = 'auto';
+    });
+    
+    filterSlider.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const x = e.touches[0].pageX - filterSlider.offsetLeft;
+        const walk = (currentX - x) * 2;
+        filterSlider.scrollLeft += walk;
+        currentX = x;
+    });
+    
+    filterSlider.addEventListener('touchend', () => {
+        filterSlider.style.scrollBehavior = 'smooth';
+        updateSliderButtons();
+    });
+    
+    // Button click handlers
+    prevButton.addEventListener("click", function() {
+        if (!this.disabled) {
+            scrollSlider('prev');
+        }
+    });
+    
+    nextButton.addEventListener("click", function() {
+        if (!this.disabled) {
+            scrollSlider('next');
+        }
+    });
+    
+    // Auto-scroll to active button
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Small delay to ensure the click is processed
+            setTimeout(() => {
+                if (this.classList.contains('active')) {
+                    scrollToButton(this);
+                }
+            }, 100);
+        });
+    });
+    
+    // Update button states on scroll and resize
+    filterSlider.addEventListener("scroll", updateSliderButtons);
+    window.addEventListener("resize", updateSliderButtons);
+    
+    // Initialize button states
+    updateSliderButtons();
+    
+    // Ensure "All" button is visible on load - FIXED VERSION
+    function ensureAllButtonVisible() {
+        const allButton = document.querySelector('[data-filter="all"]');
+        if (allButton) {
+            // Scroll to the very beginning to ensure "All" button is visible
+            filterSlider.scrollTo({
+                left: 0,
+                behavior: 'instant'
+            });
+            
+            // Double check after a small delay
+            setTimeout(() => {
+                const buttonRect = allButton.getBoundingClientRect();
+                const containerRect = filterSlider.getBoundingClientRect();
+                
+                // If "All" button is not fully visible, scroll to it
+                if (buttonRect.left < containerRect.left || buttonRect.right > containerRect.right) {
+                    filterSlider.scrollTo({
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
+        }
+    }
+    
+    // Call on load and after resize
+    ensureAllButtonVisible();
+    window.addEventListener('resize', ensureAllButtonVisible);
+    
+    // Add keyboard navigation
+    document.addEventListener("keydown", function(e) {
+        if (e.key === "ArrowLeft" && !prevButton.disabled) {
+            scrollSlider('prev');
+        } else if (e.key === "ArrowRight" && !nextButton.disabled) {
+            scrollSlider('next');
+        }
+    });
 });
 </script>
-{% endblock %}
+{% endblock %}  

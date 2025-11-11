@@ -136,33 +136,44 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-11">
-                <div class="td-about-title-wrap text-center mb-30  wow fadeInUp" data-wow-duration=".9s" data-wow-delay=".4s">
+                <div class="td-about-title-wrap text-center mb-30 wow fadeInUp" data-wow-duration=".9s" data-wow-delay=".4s">
                     <span class="td-section-subtitle mb-30">Bixji Talks</span>
                     <h2 class="td-section-title">BixjiTalks – Your Story. Your Stage</h2>
                     <p class="td-subtitle">A talk show series where visionaries, founders, and creators share their life journey, failures, and lessons.</p>
                 </div>
-                <div class="td-about-thumb-wrap bg-position p-relative text-center" data-background="{% static 'web/assets/img/about/flower.png' %}">
-                    <div class="td-about-thumb">
-                        <img src="{% static 'web/assets/img/about/thumb.jpg' %}" alt="">
-                    </div>
-                    <div class="td-about-video-inner text-center">
-                        <a class="td-video-play popup-video td-pulse-border" href="https://www.youtube.com/watch?v=TfU0qjuZkJ4">
-                            <span class="p-relative z-index-11">
-                                <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M19.8571 12L0.571429 23.1346L0.57143 0.865352L19.8571 12Z" fill="currentColor" />
-                                </svg>
-                            </span>
-                            </a>
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="text-center mt-4">
+
+        <!-- Slider Section -->
+        <div class="td-bixji-slider-wrap mt-10 mb-20 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".5s">
+            <div class="swiper-container td-bixji-talks-slider">
+                <div class="swiper-wrapper">
+                    {% for talk in bixji_talks %}
+                    <div class="swiper-slide">
+                        <div class="td-bixji-card position-relative rounded-lg overflow-hidden shadow-lg">
+                            <img src="{{ talk.image.url }}" alt="{{ talk.title }}" class="img-fluid w-100">
+                            <div class="td-video-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                                <a href="{{ talk.video_link }}" target="_blank" class="td-video-icon d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-play"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Slider navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+
+        <!-- Watch Episodes Button -->
+        <div class="text-center mt-5">
             <a class="td-btn td-left-right" href="{% url 'web:bixji_talks' %}">
                 <span class="mr10 td-text d-inline-block mr-5">Watch Episodes</span>
                 <span class="td-arrow-angle">
                     <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.943836 13.5C0.685616 13.5 0.45411 13.4021 0.276027 13.224C0.0979452 13.0459 0 12.8055 0 12.5562C0 12.3068 0.0979452 12.0664 0.276027 11.8884L9.76781 2.38767H2.02123C1.49589 2.38767 1.0774 1.96027 1.0774 1.44384C1.0774 0.927397 1.50479 0.5 2.03014 0.5H12.0562C12.1274 0.5 12.1986 0.508904 12.2788 0.526712L12.4034 0.562329L12.537 0.633562C12.5637 0.65137 12.5993 0.678082 12.626 0.69589C12.6973 0.749315 12.7507 0.80274 12.7952 0.856164C12.8219 0.891781 12.8575 0.927397 12.8842 0.989726L12.9555 1.1411L12.9822 1.22123C13 1.29247 13.0089 1.3726 13.0089 1.44384V11.4699C13.0089 11.9952 12.5815 12.4137 12.0651 12.4137C11.5486 12.4137 11.1212 11.9863 11.1212 11.4699V3.72329L1.62055 13.224C1.44247 13.4021 1.20205 13.5 0.943836 13.5Z" fill="white"></path>
                         <path d="M0.943836 13.5C0.685616 13.5 0.45411 13.4021 0.276027 13.224C0.0979452 13.0459 0 12.8055 0 12.5562C0 12.3068 0.0979452 12.0664 0.276027 11.8884L9.76781 2.38767H2.02123C1.49589 2.38767 1.0774 1.96027 1.0774 1.44384C1.0774 0.927397 1.50479 0.5 2.03014 0.5H12.0562C12.1274 0.5 12.1986 0.508904 12.2788 0.526712L12.4034 0.562329L12.537 0.633562C12.5637 0.65137 12.5993 0.678082 12.626 0.69589C12.6973 0.749315 12.7507 0.80274 12.7952 0.856164C12.8219 0.891781 12.8575 0.927397 12.8842 0.989726L12.9555 1.1411L12.9822 1.22123C13 1.29247 13.0089 1.3726 13.0089 1.44384V11.4699C13.0089 11.9952 12.5815 12.4137 12.0651 12.4137C11.5486 12.4137 11.1212 11.9863 11.1212 11.4699V3.72329L1.62055 13.224C1.44247 13.4021 1.20205 13.5 0.943836 13.5Z" fill="white"></path>
                     </svg>
                 </span>
@@ -231,14 +242,16 @@
         <div class="row">
             {% for award in awards %}
             <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.3s">
-                <div class="td-blog-item td-blog-2-item mb-30">
-                    <div class="td-blog-thumb p-relative fix">
-                        <img class="w-100" src="{{award.image.url}}" alt="{{award.title}}">
+                <a href="{{award.get_absolute_url}}">
+                    <div class="td-blog-item td-blog-2-item mb-30">
+                        <div class="td-blog-thumb p-relative fix">
+                            <img class="w-100" src="{{award.image.url}}" alt="{{award.title}}">
+                        </div>
+                        <div class="td-blog-2-content">
+                            <h3 class="td-blog-title mb-20"><a class="underline-black" href="{{award.get_absolute_url}}">{{award.title}}</a></h3>
+                        </div>
                     </div>
-                    <div class="td-blog-2-content">
-                        <h3 class="td-blog-title mb-20"><a class="underline-black" href="blog-details.html">{{award.title}}</a></h3>
-                    </div>
-                </div>
+                </a>
             </div>
            {% endfor %}
         </div>
@@ -276,26 +289,28 @@
             {% for club in clubs %}
             <div class="col-xl-4 col-lg-6 col-md-6">
                 <div class="td-cetagory-item mb-30 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">
-                    <div class="td-cetagory-thumb p-relative">
-                        <img src="{{ club.image.url }}" alt="{{ club.name }}">
-                        <div class="td-cetagory-content">
-                            <div class="d-flex justify-content-between">
-                                <div class="td-cetagory-tittle-wrap mr-10 d-flex justify-content-center align-items-center">
-                                    <h5 class="td-cetagory-tittle mb-0"><a href="{{ club.get_absolute_url }}">{{ club.name }}</a></h5>
-                                </div>
-                                <div class="td-cetagory-btn">
-                                    <a class="td-left-right text" href="{{club.get_absolute_url}}">
-                                        <span class="td-arrow-angle">
-                                            <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M0.943836 13.5C0.685616 13.5 0.45411 13.4021 0.276027 13.224C0.0979452 13.0459 0 12.8055 0 12.5562C0 12.3068 0.0979452 12.0664 0.276027 11.8884L9.76781 2.38767H2.02123C1.49589 2.38767 1.0774 1.96027 1.0774 1.44384C1.0774 0.927397 1.50479 0.5 2.03014 0.5H12.0562C12.1274 0.5 12.1986 0.508904 12.2788 0.526712L12.4034 0.562329L12.537 0.633562C12.5637 0.65137 12.5993 0.678082 12.626 0.69589C12.6973 0.749315 12.7507 0.80274 12.7952 0.856164C12.8219 0.891781 12.8575 0.927397 12.8842 0.989726L12.9555 1.1411L12.9822 1.22123C13 1.29247 13.0089 1.3726 13.0089 1.44384V11.4699C13.0089 11.9952 12.5815 12.4137 12.0651 12.4137C11.5486 12.4137 11.1212 11.9863 11.1212 11.4699V3.72329L1.62055 13.224C1.44247 13.4021 1.20205 13.5 0.943836 13.5Z" fill="currentColor" />
-                                                <path d="M0.943836 13.5C0.685616 13.5 0.45411 13.4021 0.276027 13.224C0.0979452 13.0459 0 12.8055 0 12.5562C0 12.3068 0.0979452 12.0664 0.276027 11.8884L9.76781 2.38767H2.02123C1.49589 2.38767 1.0774 1.96027 1.0774 1.44384C1.0774 0.927397 1.50479 0.5 2.03014 0.5H12.0562C12.1274 0.5 12.1986 0.508904 12.2788 0.526712L12.4034 0.562329L12.537 0.633562C12.5637 0.65137 12.5993 0.678082 12.626 0.69589C12.6973 0.749315 12.7507 0.80274 12.7952 0.856164C12.8219 0.891781 12.8575 0.927397 12.8842 0.989726L12.9555 1.1411L12.9822 1.22123C13 1.29247 13.0089 1.3726 13.0089 1.44384V11.4699C13.0089 11.9952 12.5815 12.4137 12.0651 12.4137C11.5486 12.4137 11.1212 11.9863 11.1212 11.4699V3.72329L1.62055 13.224C1.44247 13.4021 1.20205 13.5 0.943836 13.5Z" fill="currentColor" />
-                                            </svg>
-                                        </span>
-                                    </a>
+                    <a href="{{club.get_absolute_url}}">
+                        <div class="td-cetagory-thumb p-relative">
+                            <img src="{{ club.image.url }}" alt="{{ club.name }}">
+                            <div class="td-cetagory-content">
+                                <div class="d-flex justify-content-between">
+                                    <div class="td-cetagory-tittle-wrap mr-10 d-flex justify-content-center align-items-center">
+                                        <h5 class="td-cetagory-tittle mb-0"><a href="{{ club.get_absolute_url }}">{{ club.name }}</a></h5>
+                                    </div>
+                                    <div class="td-cetagory-btn">
+                                        <a class="td-left-right text" href="{{club.get_absolute_url}}">
+                                            <span class="td-arrow-angle">
+                                                <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0.943836 13.5C0.685616 13.5 0.45411 13.4021 0.276027 13.224C0.0979452 13.0459 0 12.8055 0 12.5562C0 12.3068 0.0979452 12.0664 0.276027 11.8884L9.76781 2.38767H2.02123C1.49589 2.38767 1.0774 1.96027 1.0774 1.44384C1.0774 0.927397 1.50479 0.5 2.03014 0.5H12.0562C12.1274 0.5 12.1986 0.508904 12.2788 0.526712L12.4034 0.562329L12.537 0.633562C12.5637 0.65137 12.5993 0.678082 12.626 0.69589C12.6973 0.749315 12.7507 0.80274 12.7952 0.856164C12.8219 0.891781 12.8575 0.927397 12.8842 0.989726L12.9555 1.1411L12.9822 1.22123C13 1.29247 13.0089 1.3726 13.0089 1.44384V11.4699C13.0089 11.9952 12.5815 12.4137 12.0651 12.4137C11.5486 12.4137 11.1212 11.9863 11.1212 11.4699V3.72329L1.62055 13.224C1.44247 13.4021 1.20205 13.5 0.943836 13.5Z" fill="currentColor" />
+                                                    <path d="M0.943836 13.5C0.685616 13.5 0.45411 13.4021 0.276027 13.224C0.0979452 13.0459 0 12.8055 0 12.5562C0 12.3068 0.0979452 12.0664 0.276027 11.8884L9.76781 2.38767H2.02123C1.49589 2.38767 1.0774 1.96027 1.0774 1.44384C1.0774 0.927397 1.50479 0.5 2.03014 0.5H12.0562C12.1274 0.5 12.1986 0.508904 12.2788 0.526712L12.4034 0.562329L12.537 0.633562C12.5637 0.65137 12.5993 0.678082 12.626 0.69589C12.6973 0.749315 12.7507 0.80274 12.7952 0.856164C12.8219 0.891781 12.8575 0.927397 12.8842 0.989726L12.9555 1.1411L12.9822 1.22123C13 1.29247 13.0089 1.3726 13.0089 1.44384V11.4699C13.0089 11.9952 12.5815 12.4137 12.0651 12.4137C11.5486 12.4137 11.1212 11.9863 11.1212 11.4699V3.72329L1.62055 13.224C1.44247 13.4021 1.20205 13.5 0.943836 13.5Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             {% endfor %}
@@ -368,7 +383,7 @@
                                         </div>
                                         <span class="dvdr"></span>
                                         <a class="td-btn td-btn-3-squre td-left-right text3 mr-25" href="{{event.get_absolute_url}}">
-                                            <span class="mr10 td-text d-inline-block mr-5">Buy Ticket</span>
+                                            <span class="mr10 td-text d-inline-block mr-5">View Details</span>
                                             <span class="td-arrow-angle">
                                                 <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M0.943836 13.5C0.685616 13.5 0.45411 13.4021 0.276027 13.224C0.0979452 13.0459 0 12.8055 0 12.5562C0 12.3068 0.0979452 12.0664 0.276027 11.8884L9.76781 2.38767H2.02123C1.49589 2.38767 1.0774 1.96027 1.0774 1.44384C1.0774 0.927397 1.50479 0.5 2.03014 0.5H12.0562C12.1274 0.5 12.1986 0.508904 12.2788 0.526712L12.4034 0.562329L12.537 0.633562C12.5637 0.65137 12.5993 0.678082 12.626 0.69589C12.6973 0.749315 12.7507 0.80274 12.7952 0.856164C12.8219 0.891781 12.8575 0.927397 12.8842 0.989726L12.9555 1.1411L12.9822 1.22123C13 1.29247 13.0089 1.3726 13.0089 1.44384V11.4699C13.0089 11.9952 12.5815 12.4137 12.0651 12.4137C11.5486 12.4137 11.1212 11.9863 11.1212 11.4699V3.72329L1.62055 13.224C1.44247 13.4021 1.20205 13.5 0.943836 13.5Z" fill="white" />
@@ -401,3 +416,26 @@
 <!-- td-events-area-end -->
 {% endif %}
 {% endblock %}
+
+{% block javascript %}
+<script>
+    var swiper = new Swiper('.td-bixji-talks-slider', {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            0: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 }
+        }
+    });
+</script>
+{% endblock javascript %}

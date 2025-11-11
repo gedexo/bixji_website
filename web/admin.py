@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, Banners, Magazine, Award, AwardNomination, AwardGallery, Club, Event, EventRegistration, EventGallery, BixjiTalk, BixjiTalkEnquiry, Team, FAQ, Testimonial
+from .models import Contact, Banners, Magazine, Award, AwardNomination, AwardGallery, Club, Event, EventRegistration, EventGallery, BixjiTalk, BixjiTalkEnquiry, Meta, Team, FAQ, Testimonial
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
@@ -64,3 +64,7 @@ class FAQAdmin(admin.ModelAdmin):
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
     list_display = ("name", "position")
+
+@admin.register(Meta)
+class MetaAdmin(admin.ModelAdmin):
+    list_display = ("page", "meta_title",)

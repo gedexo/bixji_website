@@ -24,24 +24,30 @@
 <!-- td-breadcrumb-area-end -->
 
 <!-- td-bixji-talks-area-start -->
-<div class="td-gallery-area pt-80 pb-80">
+<div class="td-gallery-area td-bixji-talk-area pt-30 pb-30">
     <div class="container">
         <div class="row">
             <div class="td-about-title-wrap text-center mb-30 wow fadeInUp" data-wow-duration=".9s" data-wow-delay=".4s">
                 <h2 class="td-section-title">BixjiTalks – Every Voice Matters.</h2>
                 <p class="td-subtitle">Our flagship storytelling series featuring entrepreneurs, founders, influencers, artists, and social leaders.</p>
             </div>
+
             {% for bixji_talk in bixji_talks %}
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="td-gallery-wrap mb-25">
-                    <a href="{{bixji_talk.video_link}}" target="_blank">
-                        <div class="td-gallery-thumb p-relative">
-                            <img class="w-100" src="{{bixji_talk.image.url}}" alt="{{bixji_talk.title}}">
-                            <div class="td-gallery-icon p-absulute">
-                                <span><i class="flaticon-up-right-arrow"></i></span>
+                    <a href="{{ bixji_talk.video_link }}" target="_blank" class="td-gallery-link">
+                        <div class="td-gallery-thumb position-relative overflow-hidden rounded-2 shadow-lg">
+                            <img class="w-100" src="{{ bixji_talk.image.url }}" alt="{{ bixji_talk.title }}">
+                            <div class="td-video-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                                <div class="td-video-icon d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-play"></i>
+                                </div>
                             </div>
                         </div>
                     </a>
+                    <div class="text-center mt-3">
+                        <h5 class="text-white">{{ bixji_talk.title }}</h5>
+                    </div>
                 </div>
             </div>
             {% endfor %}

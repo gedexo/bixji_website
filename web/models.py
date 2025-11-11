@@ -56,6 +56,9 @@ class Magazine(models.Model):
 class Award(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
+    meta_title = models.CharField(max_length=180, blank=True, null=True)
+    meta_keywords = models.CharField(max_length=200, blank=True, null=True)
+    meta_description = models.CharField(max_length=180, blank=True, null=True)
     image = models.ImageField(upload_to='awards/')
     description = HTMLField()
 
@@ -100,6 +103,9 @@ class AwardNomination(models.Model):
 class Club(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
+    meta_title = models.CharField(max_length=180, blank=True, null=True)
+    meta_keywords = models.CharField(max_length=200, blank=True, null=True)
+    meta_description = models.CharField(max_length=180, blank=True, null=True)
     image = models.ImageField(upload_to='clubs/')
     description = HTMLField()
 
@@ -128,6 +134,9 @@ class ClubRegistration(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
+    meta_title = models.CharField(max_length=180, blank=True, null=True)
+    meta_keywords = models.CharField(max_length=200, blank=True, null=True)
+    meta_description = models.CharField(max_length=180, blank=True, null=True)
     date_time = models.DateTimeField()
     location = models.CharField(max_length=200)
     image = models.ImageField(upload_to='events/')
@@ -243,3 +252,32 @@ class Testimonial(models.Model):
     class Meta:
         verbose_name = 'Testimonial'
         verbose_name_plural = 'Testimonials'
+
+    
+class Meta(models.Model):
+    PAGES = (
+        ('home', 'Home'),
+        ('about', 'About'),
+        ('bixji_talks', 'Bixji Talks'),
+        ('magazines', 'Magazines'),
+        ('awards', 'Awards'),
+        ('awards_gallery', 'Awards Gallery'),
+        ('clubs', 'Clubs'),
+        ('events', 'Events'),
+        ('event_gallery', 'Event Gallery'),
+        ('contact', 'Contact'),
+    )
+    page = models.CharField(max_length=180, choices=PAGES)
+    meta_title = models.CharField(max_length=180)
+    meta_keywords = models.CharField(max_length=200)
+    meta_description = models.CharField(max_length=180)
+    canonical_url = models.URLField(blank=True, null=True)
+    image = models.ImageField(upload_to="meta/", blank=True, null=True)
+    
+    def __str__(self):
+        return self.meta_title
+    
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = 'Meta'
+        verbose_name_plural = 'Metas'

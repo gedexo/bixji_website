@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 
 from . import forms
-from .models import Banners, Magazine, Award, AwardGallery, Club, Event, EventGallery, BixjiTalk, Testimonial, FAQ, Team
+from .models import Banners, Magazine, Award, AwardGallery, Club, Event, EventGallery, BixjiTalk, Meta, Testimonial, FAQ, Team
 
 
 def index(request):
@@ -15,7 +15,8 @@ def index(request):
         "awards": Award.objects.all()[:3],
         "clubs": Club.objects.all()[:3],
         "events": Event.objects.all()[:3],
-        "bixji_talks": BixjiTalk.objects.all()
+        "bixji_talks": BixjiTalk.objects.all(),
+        "meta" : Meta.objects.filter(page='home').first(),
     }
     return render(request, 'web/index.html', context)
 
@@ -26,6 +27,7 @@ def about(request):
         "testimonials": Testimonial.objects.all(),
         "faqs": FAQ.objects.all(),
         "teams": Team.objects.all(),
+        "meta" : Meta.objects.filter(page='about').first(),
     }
     return render(request, "web/about.html", context)
 
@@ -88,6 +90,7 @@ def bixji_talks(request):
             "bixji_talks": BixjiTalk.objects.all(),
             "form": form,
             "turnstile_site_key": settings.CLOUDLFAIR_TURNSTILE_PUBLIC_KEY,
+            "meta" : Meta.objects.filter(page='bixji_talks').first(),
 
         }
     return render(request, "web/bixji_talks.html", context)
@@ -97,6 +100,7 @@ def magazines(request):
     context = {
         "is_magazines": True,
         "magazines": Magazine.objects.all(),
+        "meta" : Meta.objects.filter(page='magazines').first(),
     }
     return render(request, "web/magazines.html", context)
 
@@ -105,6 +109,7 @@ def awards(request):
     context = {
         "is_awards": True,
         "awards": Award.objects.all(),
+        "meta" : Meta.objects.filter(page='awards').first(),
     }
     return render(request, "web/awards.html", context)
 
@@ -181,6 +186,7 @@ def award_gallery(request):
         "is_award_gallery": True,
         "awards": awards,
         "award_galleries": award_galleries,
+        "meta" : Meta.objects.filter(page='awards_gallery').first(),
     }
     return render(request, "web/award-gallery.html", context)
 
@@ -189,6 +195,7 @@ def clubs(request):
     context = {
         "is_clubs": True,
         "clubs": Club.objects.all(),
+        "meta" : Meta.objects.filter(page='clubs').first(),
     }
     return render(request, "web/clubs.html", context)
 
@@ -262,6 +269,7 @@ def events(request):
     context = {
         "is_events": True,
         "events": Event.objects.all(),
+        "meta" : Meta.objects.filter(page='events').first(),
     }
     return render(request, "web/events.html", context)
 
@@ -339,6 +347,7 @@ def event_gallery(request):
         "is_event_gallery": True,
         "events": events,
         "event_galleries": event_galleries,
+        "meta" : Meta.objects.filter(page='event_gallery').first(),
     }
     return render(request, "web/event-gallery.html", context)
 
@@ -401,5 +410,6 @@ def contact(request):
             "is_contact": True,
             "form": form,
             "turnstile_site_key": settings.CLOUDLFAIR_TURNSTILE_PUBLIC_KEY,
+            "meta" : Meta.objects.filter(page='contact').first(),
         }
     return render(request, "web/contact.html", context)

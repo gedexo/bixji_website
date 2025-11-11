@@ -2,6 +2,14 @@
 {% load static %}
 {% block content %}
 
+
+{% block meta %}
+    <title>{{award.meta_title}}</title>
+    <meta name="keywords" content="{{award.meta_keywords}}">
+    <meta name="title" content="{{award.meta_title}}" />
+    <meta name="description" content="{{award.meta_description}}" />
+{% endblock meta %}
+
 <!-- td-breadcrumb-area-start -->
 <div class="td-breadcrumb-area td-breadcrumb-spacing bg-position" data-background="{% static 'web/assets/img/breadcrumb/breadcrumb.jpg' %}">
     <div class="container">

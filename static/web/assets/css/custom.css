@@ -37,23 +37,54 @@ div:where(.swal2-container) h2:where(.swal2-title){
         font-size: 18px !important;
         text-transform: capitalize;
     }
+
+    .td-hero-area {
+        height: 100% !important;
+    }
+
+    .td-gallery-thumb img {
+        height: 432px !important;
+        width: 432px !important;
+        object-fit: cover !important;
+    }
     
 }
 
 @media (max-width: 991px) {
     .td-hero-3-subtitle {
-    font-weight: 500;
-    text-transform: uppercase;
-    color: var(--td-common-white);
-    font-size: 15px;
-    line-height: 25px;
+        font-weight: 400;
+        text-transform: capitalize;
+        color: var(--td-common-white);
+        font-size: 15px;
+        line-height: 25px;
+    }
+    .td-hero-area {
+        height: 600px !important;
+    }
+    .td-section-title {
+        font-size: 25px !important;
+    }
+    body {
+        font-size: 14px !important;
+        line-height: 20px !important;
+    }
+    .td-hero-3-title {
+        font-size: 30px !important;
+    }
+    .td-faq-wrapper .accordion-button{
+        font-size: 15px !important;
+    }
+    .td-breadcrumb-spacing {
+        padding-bottom: 40px !important;
+    }
+    .td-gallery-thumb img {
+        height: 432px !important;
+        width: 100% !important;
+        object-fit: cover !important;
     }
 
 }
 
-.td-hero-area {
-    height: 100% !important;
-}
 
 .td-btn {
     border-radius: 5px !important;
@@ -171,11 +202,7 @@ div:where(.swal2-container) h2:where(.swal2-title){
     max-width: 100%;
 }   
 
-.td-gallery-thumb img {
-    height: 432px !important;
-    width: 432px !important;
-    object-fit: cover !important;
-}
+
 
 .apply-to-speak-btn {
     width: 200px;
@@ -388,4 +415,105 @@ ease;
     object-fit: cover !important;
     border-radius: 100px;
     flex: 0 0 auto;
+}
+
+.td-footer-social li {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.td-footer-social a {
+    font-family: var(--td-ff-poppins);
+    color: var(--td-grey-2);
+    transition: all 0.3s ease;
+}
+
+.td-footer-social a:hover {
+    color: var(--td-theme-secondary);
+}
+
+.td-footer-area .td-footer-widget .td-footer-logo img{
+    width: 150px !important;
+}
+.td-bixji-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.td-bixji-card img {
+    transition: transform 0.5s ease;
+}
+.td-bixji-card:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+.td-video-overlay {
+    background: rgba(0, 0, 0, 0.35);
+    transition: 0.3s ease;
+}
+.td-bixji-card:hover .td-video-overlay {
+    background: rgba(0, 0, 0, 0.55);
+}
+.td-video-icon {
+    width: 65px;
+    height: 65px;
+    background: rgba(255, 0, 0, 0.85);
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+.td-video-icon:hover {
+    transform: scale(1.1);
+    background: rgba(255, 0, 0, 1);
+}
+.td-bixji-card-content h5 {
+    margin-top: 10px;
+    color: #fff;
+    font-weight: 500;
+}
+.swiper-button-next, .swiper-button-prev {
+    color: white;
+}
+
+
+
+
+.td-bixji-talk-area .td-gallery-thumb {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.td-bixji-talk-area .td-gallery-thumb img {
+    transition: transform 0.5s ease, filter 0.3s ease;
+}
+.td-bixji-talk-area .td-gallery-thumb:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+.td-bixji-talk-area .td-video-overlay {
+    background: rgba(0, 0, 0, 0.35);
+    transition: background 0.3s ease;
+}
+.td-bixji-talk-area .td-gallery-thumb:hover .td-video-overlay {
+    background: rgba(0, 0, 0, 0.55);
+}
+.td-bixji-talk-area .td-video-icon {
+    width: 65px;
+    height: 65px;
+    background: rgba(255, 0, 0, 0.85);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+.td-bixji-talk-area .td-video-icon:hover {
+    transform: scale(1.1);
+    background: rgba(255, 0, 0, 1);
+}
+.td-bixji-talk-area .td-gallery-wrap h5 {
+    color: #fff;
+    font-weight: 500;
 }

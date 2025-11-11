@@ -1,84 +1,96 @@
 {% load static %}
 <!-- footer-area-start -->
-    <footer>
-        <div class="td-footer-area bg-position pt-130" data-background="{% static 'web/assets/img/footer/bg.jpg' %}">
-            <div class="container">
-                <div class="row mb-30">
-                    <div class="col-lg-3 col-md-5">
-                        <div class="td-footer-widget mb-40">
-                            <div class="td-footer-logo mb-20">
-                                <a href="index-2.html"><img src="{% static 'web/assets/img/logo/logo-white.png' %}" alt="logo"></a>
-                            </div>
-                            <p class="text mb-10">Kondotty, Kerala</p>
-                            <a class="number mb-10 d-inline-block" href="tel:+919847520679">+91 9847520679</a>
-                            <a class="email" href="mailto:info@bixji.com">info@bixji.com</a>
+<footer>
+    <div class="td-footer-area bg-position pt-130" data-background="{% static 'web/assets/img/footer/bg.jpg' %}">
+        <div class="container">
+            <div class="row mb-30">
+                <!-- Footer Logo & Description -->
+                <div class="col-lg-3 col-md-5">
+                    <div class="td-footer-widget mb-40">
+                        <div class="td-footer-logo mb-20">
+                            <a href="{% url 'web:index' %}">
+                                <img src="{% static 'web/assets/img/logo/logo-white.png' %}" alt="logo">
+                            </a>
                         </div>
+                        <p class="text">
+                            Bixji connects leaders, creators, and innovators through inspiring talks, exclusive clubs, and engaging events that promote growth, collaboration, and community.
+                        </p>
                     </div>
-                    <div class="col-lg-5 col-md-7">
-                        <div class="td-footer-widget space ml-90 mb-40">
-                            <h3 class="td-footer-title mb-20">Quick links</h3>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="td-footer-links">
-                                        <ul>
-                                            <li><a href="{% url 'web:index' %}">Home</a></li>
-                                            <li><a href="{% url 'web:about' %}">About</a></li>
-                                            <li><a href="{% url 'web:bixji_talks' %}">Bixji Talks</a></li>
-                                            <li><a href="{% url 'web:magazines' %}">Magazines</a></li>
-                                            <li><a href="{% url 'web:awards' %}">Awards</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="td-footer-links">
-                                        <ul>
-                                            <li><a href="{% url 'web:clubs' %}">Clubs</a></li>
-                                            <li><a href="{% url 'web:events' %}">Events</a></li>
-                                            <li><a href="{% url 'web:contact' %}">Contact Us</a></li>
-                                        </ul>
-                                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-5 col-md-7">
+                    <div class="td-footer-widget space ml-90 mb-40">
+                        <h3 class="td-footer-title mb-20">Quick Links</h3>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="td-footer-links">
+                                    <ul>
+                                        <li><a href="{% url 'web:index' %}">Home</a></li>
+                                        <li><a href="{% url 'web:about' %}">About</a></li>
+                                        <li><a href="{% url 'web:bixji_talks' %}">Bixji Talks</a></li>
+                                        <li><a href="{% url 'web:magazines' %}">Magazines</a></li>
+                                        <li><a href="{% url 'web:awards' %}">Awards</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="td-footer-widget td-footer-subscribe mb-40">
-                            <h3 class="td-footer-title mb-20">Quick links</h3>
-                            <p class="text mb-0">Our expertise, as well as our passion for web
-                                design, sets us apart from other agencies.</p>
-                            <div class="td-footer-form p-relative">
-                                <input type="text" placeholder="E-mail Address">
-                                <button type="submit" class="td-footer-form-btn">
-                                    <svg width="21" height="17" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.03931 8.9707H19.0393M19.0393 8.9707L12.0393 1.9707M19.0393 8.9707L12.0393 15.9707" stroke="#F248B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </button>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="td-footer-links">
+                                    <ul>
+                                        <li><a href="{% url 'web:awards_gallery' %}">Awards Gallery</a></li>
+                                        <li><a href="{% url 'web:clubs' %}">Clubs</a></li>
+                                        <li><a href="{% url 'web:events' %}">Events</a></li>
+                                        <li><a href="{% url 'web:event_gallery' %}">Events Gallery</a></li>
+                                        <li><a href="{% url 'web:contact' %}">Contact Us</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="td-footer-bottom pt-40 pb-15">
-                            <div class="row align-items-center">
-                                <div class="col-md-9">
-                                    <div class="td-footer-bottom-copyright mb-30">
-                                        <p>Copyright {% now 'Y' %}, All Right reserved by <a href="https://bixji.in/" target="_blank"> BIXJI.</a></p>
-                                    </div>
+
+                <!-- Social Media Links -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="td-footer-widget td-footer-subscribe mb-40">
+                        <h3 class="td-footer-title mb-20">Follow Us</h3>
+                        <ul class="td-footer-social list-inline">
+                            <li class="list-inline-item">
+                                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="td-footer-bottom pt-40 pb-15">
+                        <div class="row align-items-center">
+                            <div class="col-md-9">
+                                <div class="td-footer-bottom-copyright mb-30">
+                                    <p>Copyright {% now 'Y' %}, All Right reserved by <a href="https://bixji.in/" target="_blank"> BIXJI.</a></p>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="td-footer-bottom-social text-right mb-30">
-                                        <span><a href="#"><i class="fa-brands fa-linkedin"></i></a></span>
-                                        <span><a href="#"><i class="fa-brands fa-instagram"></i></a></span>
-                                        <span>
-                                            <a href="#">
-                                                <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M16.3783 0.111328H19.3942L12.8054 7.64181L20.5565 17.8891H14.4875L9.73399 11.6742L4.2949 17.8891H1.27723L8.32453 9.83441L0.888855 0.111328H7.11199L11.4087 5.79201L16.3783 0.111328ZM15.3199 16.084H16.991L6.20396 1.82164H4.41068L15.3199 16.084Z" fill="currentColor" />
-                                                </svg>
-                                            </a>
-                                        </span>
-                                        <span><a href="#"><i class="fa-brands fa-whatsapp"></i></a></span>
-                                    </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="td-footer-bottom-social text-right mb-30">
+                                    <span><a href="#"><i class="fa-brands fa-linkedin"></i></a></span>
+                                    <span><a href="#"><i class="fa-brands fa-instagram"></i></a></span>
+                                    <span>
+                                        <a href="#">
+                                            <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M16.3783 0.111328H19.3942L12.8054 7.64181L20.5565 17.8891H14.4875L9.73399 11.6742L4.2949 17.8891H1.27723L8.32453 9.83441L0.888855 0.111328H7.11199L11.4087 5.79201L16.3783 0.111328ZM15.3199 16.084H16.991L6.20396 1.82164H4.41068L15.3199 16.084Z" fill="currentColor" />
+                                            </svg>
+                                        </a>
+                                    </span>
+                                    <span><a href="#"><i class="fa-brands fa-whatsapp"></i></a></span>
                                 </div>
                             </div>
                         </div>
@@ -86,5 +98,8 @@
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- footer-area-end -->
+    </div>
+</footer>
+<!-- footer-area-end -->
+
+    
